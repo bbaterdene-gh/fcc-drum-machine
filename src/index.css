@@ -2,3 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+/* chrome */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.5rem;
+  height: 1.5rem;
+  background: #0000ff;
+}
+/* firefox */
+input[type='range']::-moz-range-thumb {
+  width: 0.5rem;
+  height: 1.5rem;
+  background: #0000ff;
+}
