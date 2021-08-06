@@ -1,13 +1,12 @@
 import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { selectPower, toggle } from "../features/power/powerSlice"
 
 export const DrumControl = () => {
-  const [powerOn, setPowerOn] = useState(false)
   const [bankOn, setBankOn] = useState(false)
   const [volumeRange, setVolumeRange] = useState('0.64')
-
-  const handlePowerSwitch = () => {
-    setPowerOn(!powerOn)
-  }
+  const power = useSelector(selectPower)
+  const dispatch = useDispatch()
 
   const handleBankSwitch = () => {
     setBankOn(!bankOn)
@@ -21,10 +20,10 @@ export const DrumControl = () => {
     <div className="mt-20 text-center">
       <div className="flex flex-col items-center">
         <span className="text-xs">Power</span>
-        <div className="select-none relative w-9" onClick={handlePowerSwitch}>
+        <div className="select-none relative w-9" onClick={() => dispatch(toggle())}>
           <input type="checkbox"
-          className={`cursor-pointer appearance-none absolute bg-blue w-5 h-4 border-2 border-current ${powerOn ? 'right-0' : 'left-0'}`}
-          defaultChecked={powerOn}/>
+          className={`cursor-pointer appearance-none absolute bg-blue w-5 h-4 border-2 border-current ${power ? 'right-0' : 'left-0'}`}
+          defaultChecked={power}/>
           <label className="cursor-pointer bg-black block h-4"></label>
         </div>
       </div>
