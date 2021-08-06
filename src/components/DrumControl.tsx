@@ -1,16 +1,13 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { selectPower, toggle } from "../features/power/powerSlice"
+import { selectBank, toggleBank } from "../features/bank/bankSlice"
+import { selectPower, togglePower } from "../features/power/powerSlice"
 
 export const DrumControl = () => {
-  const [bankOn, setBankOn] = useState(false)
   const [volumeRange, setVolumeRange] = useState('0.64')
+  const bank = useSelector(selectBank)
   const power = useSelector(selectPower)
   const dispatch = useDispatch()
-
-  const handleBankSwitch = () => {
-    setBankOn(!bankOn)
-  }
 
   const handleVolumeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVolumeRange(e.target.value)
@@ -20,7 +17,7 @@ export const DrumControl = () => {
     <div className="mt-20 text-center">
       <div className="flex flex-col items-center">
         <span className="text-xs">Power</span>
-        <div className="select-none relative w-9" onClick={() => dispatch(toggle())}>
+        <div className="select-none relative w-9" onClick={() => dispatch(togglePower())}>
           <input type="checkbox"
           className={`cursor-pointer appearance-none absolute bg-blue w-5 h-4 border-2 border-current ${power ? 'right-0' : 'left-0'}`}
           defaultChecked={power}/>
@@ -36,10 +33,10 @@ export const DrumControl = () => {
       </div>
       <div className="mt-2 flex flex-col items-center">
         <span className="text-xs">Bank</span>
-        <div className="select-none relative w-9" onClick={handleBankSwitch}>
+        <div className="select-none relative w-9" onClick={() => dispatch(toggleBank())}>
           <input type="checkbox"
-          className={`cursor-pointer appearance-none absolute bg-blue w-5 h-4 border-2 border-current ${bankOn ? 'right-0' : 'left-0'}`}
-          defaultChecked={bankOn}/>
+          className={`cursor-pointer appearance-none absolute bg-blue w-5 h-4 border-2 border-current ${bank ? 'right-0' : 'left-0'}`}
+          defaultChecked={bank}/>
           <label className="cursor-pointer bg-black block h-4"></label>
         </div>
       </div>

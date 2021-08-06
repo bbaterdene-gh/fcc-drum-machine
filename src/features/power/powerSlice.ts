@@ -7,12 +7,12 @@ const powerSlice = createSlice({
     value: true
   },
   reducers: {
-    toggle: state => {
+    togglePower: state => {
       state.value = !state.value
     }
   }
 })
 
 export const selectPower = (state: RootState) => state.power.value
-export const { toggle } = powerSlice.actions
+export const { togglePower } = powerSlice.actions
 export default powerSlice.reducer
