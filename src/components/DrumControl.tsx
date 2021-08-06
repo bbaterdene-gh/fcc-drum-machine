@@ -1,13 +1,15 @@
 import { useState } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useAppSelector, useAppDispatch } from "../app/hooks"
 import { selectBank, toggleBank } from "../features/bank/bankSlice"
+import { selectDescription } from "../features/description/descriptionSlice"
 import { selectPower, togglePower } from "../features/power/powerSlice"
 
 export const DrumControl = () => {
   const [volumeRange, setVolumeRange] = useState('0.64')
-  const bank = useSelector(selectBank)
-  const power = useSelector(selectPower)
-  const dispatch = useDispatch()
+  const bank = useAppSelector(selectBank)
+  const power = useAppSelector(selectPower)
+  const description = useAppSelector(selectDescription)
+  const dispatch = useAppDispatch()
 
   const handleVolumeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVolumeRange(e.target.value)
@@ -25,7 +27,7 @@ export const DrumControl = () => {
         </div>
       </div>
       <div className="mt-2 h-8 bg-grey w-3/5 mx-auto table">
-        <span className="align-middle table-cell">{`Start`}</span>
+        <span className="align-middle table-cell">{description}</span>
       </div>
       <div className="mt-4">
         <input type="range" min="0" max="1" step="0.01" defaultValue={volumeRange} onChange={(e) => handleVolumeRange(e)}

@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import powerReducer from '../features/power/powerSlice'
 import bankReducer from '../features/bank/bankSlice'
+import descriptionSlice from '../features/description/descriptionSlice'
 
 export const store = configureStore({
   reducer: {
     power: powerReducer,
     bank: bankReducer,
+    description: descriptionSlice,
   },
 });
 
