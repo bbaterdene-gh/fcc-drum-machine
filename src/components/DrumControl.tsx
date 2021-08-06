@@ -3,14 +3,18 @@ import { useState } from "react"
 export const DrumControl = () => {
   const [powerOn, setPowerOn] = useState(false)
   const [bankOn, setBankOn] = useState(false)
-  console.log(`here ${powerOn}`)
-  console.log(`here ${bankOn}`)
+  const [volumeRange, setVolumeRange] = useState('0.64')
+
   const handlePowerSwitch = () => {
     setPowerOn(!powerOn)
   }
 
   const handleBankSwitch = () => {
     setBankOn(!bankOn)
+  }
+
+  const handleVolumeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setVolumeRange(e.target.value)
   }
 
   return (
@@ -24,9 +28,11 @@ export const DrumControl = () => {
           <label className="cursor-pointer bg-black block h-4"></label>
         </div>
       </div>
-      <div className="mt-2 h-8 bg-grey w-3/5 mx-auto"></div>
+      <div className="mt-2 h-8 bg-grey w-3/5 mx-auto table">
+        <span className="align-middle table-cell">{`Start`}</span>
+      </div>
       <div className="mt-4">
-        <input type="range" min="0" max="1" step="0.0.1" value="0.64"
+        <input type="range" min="0" max="1" step="0.01" defaultValue={volumeRange} onChange={(e) => handleVolumeRange(e)}
         className="appearance-none w-3/4 cursor-pointer bg-charcoal h-2 shadow-sm-lr"/>
       </div>
       <div className="mt-2 flex flex-col items-center">
