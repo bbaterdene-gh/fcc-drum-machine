@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAppSelector, useAppDispatch } from "../app/hooks"
 import { selectBank, toggleBank } from "../features/bank/bankSlice"
-import { selectDescription } from "../features/description/descriptionSlice"
+import { changeDescription, selectDescription } from "../features/description/descriptionSlice"
 import { selectPower, togglePower } from "../features/power/powerSlice"
 
 export const DrumControl = () => {
@@ -13,7 +13,17 @@ export const DrumControl = () => {
 
   const handleVolumeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVolumeRange(e.target.value)
+    dispatch(changeDescription(`Volume: ${(e.target.valueAsNumber*100).toFixed()}`))
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(changeDescription(''))
+    }, 1000)
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [volumeRange, dispatch])
 
   return (
     <div className="mt-20 text-center">

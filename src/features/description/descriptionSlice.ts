@@ -7,12 +7,12 @@ const descriptionSlice = createSlice({
     value: 'Start'
   },
   reducers: {
-    change: (state, action: PayloadAction<string>) => {
+    changeDescription: (state, action: PayloadAction<string>) => {
       state.value = action.payload
     }
   }
 })
 
 export const selectDescription = (state: RootState) => state.description.value
-export const { change } = descriptionSlice.actions
+export const { changeDescription } = descriptionSlice.actions
 export default descriptionSlice.reducer
