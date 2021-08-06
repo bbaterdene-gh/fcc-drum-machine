@@ -8,6 +8,7 @@ module.exports = {
         'dark-gray': '#b3b3b3',
         'grey': '#808080',
         'charcoal': '#424242',
+        'blue': '#0000ff',
       },
     },
     fontFamily: {
@@ -20,7 +21,9 @@ module.exports = {
     }
   },
   variants: {
-    extend: {},
+    extend: {
+      inset: ['checked'],
+    },
   },
   plugins: [],
 }
