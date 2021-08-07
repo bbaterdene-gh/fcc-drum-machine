@@ -18,12 +18,9 @@ export const DrumControl = () => {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       dispatch(changeDescription(''))
     }, 1000)
-    return () => {
-      clearTimeout(timer)
-    }
   }, [volume, dispatch, kit])
 
   useEffect(() => {

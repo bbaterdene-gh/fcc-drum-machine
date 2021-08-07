@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useAppSelector } from "../app/hooks"
 import { BankPayload } from "../features/bank/bankType"
 import { selectVolume } from "../features/volumeSlice"
@@ -10,6 +11,18 @@ export const DrumButton = (props: DrumButtonProps) => {
     audio.volume = volume
     audio.play()
   }
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === props.bank.keyTrigger.toLowerCase()) {
+        playAudio()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  })
 
   return (
     <div
