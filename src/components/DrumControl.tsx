@@ -17,6 +17,11 @@ export const DrumControl = () => {
     dispatch(changeDescription(`Volume: ${(e.target.valueAsNumber*100).toFixed()}`))
   }
 
+  const handlePower = () => {
+    dispatch(togglePower())
+    dispatch(changeDescription(''))
+  }
+
   useEffect(() => {
     setTimeout(() => {
       dispatch(changeDescription(''))
@@ -32,7 +37,7 @@ export const DrumControl = () => {
     <div className="mt-20 text-center">
       <div className="flex flex-col items-center">
         <span className="text-xs">Power</span>
-        <div className="select-none relative w-9" onClick={() => dispatch(togglePower())}>
+        <div className="select-none relative w-9" onClick={handlePower}>
           <input type="checkbox"
           className={`cursor-pointer appearance-none absolute bg-blue w-5 h-4 border-2 border-current ${power ? 'right-0' : 'left-0'}`}
           defaultChecked={power}/>
@@ -42,11 +47,11 @@ export const DrumControl = () => {
       <div className="mt-2 h-8 bg-grey w-4/6 mx-auto table">
         <span className="align-middle table-cell">{description}</span>
       </div>
-      <div className="mt-4">
+      <div className={`mt-4 ${power ? '' : 'pointer-events-none'}`}>
         <input type="range" min="0" max="1" step="0.01" defaultValue={volume} onChange={(e) => handleVolumeRange(e)}
         className="appearance-none w-3/4 cursor-pointer bg-charcoal h-2 shadow-sm-lr"/>
       </div>
-      <div className="mt-2 flex flex-col items-center">
+      <div className={`mt-2 flex flex-col items-center ${power ? '' : 'pointer-events-none'}`}>
         <span className="text-xs">Bank</span>
         <div className="select-none relative w-9" onClick={() => dispatch(toggleBank())}>
           <input type="checkbox"

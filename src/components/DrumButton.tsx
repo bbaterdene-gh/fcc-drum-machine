@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../app/hooks"
 import { BankPayload } from "../features/bank/bankType"
 import { changeDescription } from "../features/description/descriptionSlice"
+import { selectPower } from "../features/power/powerSlice"
 import { selectVolume } from "../features/volumeSlice"
 
 export const DrumButton = (props: DrumButtonProps) => {
+  const power = useAppSelector(selectPower)
   const volume = useAppSelector(selectVolume)
   const dispatch = useAppDispatch()
   const [isPressed, setIsPressed] = useState(false)
@@ -29,8 +31,10 @@ export const DrumButton = (props: DrumButtonProps) => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === props.bank.keyTrigger.toLowerCase()) {
-        playAudio()
-        displayId()
+        if (power) {
+          playAudio()
+          displayId()
+        }
         activateButton()
       }
     }
@@ -41,8 +45,10 @@ export const DrumButton = (props: DrumButtonProps) => {
   })
 
   const handleClick = () => {
-    playAudio()
-    displayId()
+    if (power) {
+      playAudio()
+      displayId()
+    }
     activateButton()
   }
 
