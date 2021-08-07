@@ -4,7 +4,7 @@ import { RootState } from "../../app/store";
 const descriptionSlice = createSlice({
   name: 'description',
   initialState: {
-    value: 'Start'
+    value: ''
   },
   reducers: {
     changeDescription: (state, action: PayloadAction<string>) => {
