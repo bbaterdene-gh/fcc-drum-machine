@@ -2,6 +2,9 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    minWidth: {
+      'sm': '23rem',
+    },
     extend: {
       colors: {
         'suva-grey': '#8d8d8d',
@@ -10,6 +13,10 @@ module.exports = {
         'charcoal': '#424242',
         'blue': '#0000ff',
       },
+      width: {
+        '110': '34rem',
+        '124': '40rem',
+      }
     },
     fontFamily: {
       'russo-one': ['Russo One', 'sans-serif'],

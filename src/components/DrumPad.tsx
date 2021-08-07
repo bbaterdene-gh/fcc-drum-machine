@@ -8,7 +8,7 @@ export const DrumPad = () => {
   const bankHeater = useAppSelector(selectBankHeater)
 
   return (
-    <div className="grid grid-cols-3 grid-rows-3 gap-2">
+    <div className="grid grid-cols-3 grid-rows-3 gap-2 md:ml-auto md:my-auto">
       {(() => {
         switch(kit) {
           case 'smooth-piano-kit':

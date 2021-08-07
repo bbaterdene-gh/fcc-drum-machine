@@ -34,7 +34,7 @@ export const DrumControl = () => {
   }, [kit, dispatch])
 
   return (
-    <div className="mt-20 text-center">
+    <div className="mt-20 md:mt-10 text-center md:ml-auto">
       <div className="flex flex-col items-center">
         <span className="text-xs">Power</span>
         <div className="select-none relative w-9" onClick={handlePower}>
