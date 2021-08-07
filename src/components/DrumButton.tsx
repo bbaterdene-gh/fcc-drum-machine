@@ -12,7 +12,8 @@ export const DrumButton = (props: DrumButtonProps) => {
   const [isPressed, setIsPressed] = useState(false)
 
   const playAudio = () => {
-    const audio = new Audio(props.bank.url)
+    const audio = document.getElementById(props.bank.keyTrigger) as HTMLAudioElement
+    audio.currentTime = 0
     audio.volume = volume
     audio.play()
   }
@@ -30,7 +31,7 @@ export const DrumButton = (props: DrumButtonProps) => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === props.bank.keyTrigger.toLowerCase()) {
+      if (e.key.toLowerCase() === props.bank.keyTrigger.toLowerCase()) {
         if (power) {
           playAudio()
           displayId()
@@ -58,7 +59,7 @@ export const DrumButton = (props: DrumButtonProps) => {
       onClick={handleClick}
       className={`drum-pad h-14 w-16 p-4 text-center rounded ${isPressed ? 'bg-yellow-400' : 'bg-grey shadow-xl-rb'}`}>
       <span>{props.children}</span>
-      <audio src={props.bank.url} className="clip" id={props.children}></audio>
+      <audio src={props.bank.url} className="clip" id={props.bank.keyTrigger}></audio>
     </div>
   )
 }
