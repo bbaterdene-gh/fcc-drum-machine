@@ -54,9 +54,11 @@ export const DrumButton = (props: DrumButtonProps) => {
 
   return (
     <div
+      id={`drum-pad-${props.children}`}
       onClick={handleClick}
-      className={`h-14 w-16 p-4 text-center rounded ${isPressed ? 'bg-yellow-400' : 'bg-grey shadow-xl-rb'}`}>
+      className={`drum-pad h-14 w-16 p-4 text-center rounded ${isPressed ? 'bg-yellow-400' : 'bg-grey shadow-xl-rb'}`}>
       <span>{props.children}</span>
+      <audio src={props.bank.url} className="clip" id={props.children}></audio>
     </div>
   )
 }
