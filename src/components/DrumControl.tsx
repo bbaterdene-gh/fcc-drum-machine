@@ -1,18 +1,19 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useAppSelector, useAppDispatch } from "../app/hooks"
 import { selectBankKit, toggleBank } from "../features/bank/bankSlice"
 import { changeDescription, selectDescription } from "../features/description/descriptionSlice"
 import { selectPower, togglePower } from "../features/power/powerSlice"
+import { changeVolume, selectVolume } from "../features/volumeSlice"
 
 export const DrumControl = () => {
-  const [volumeRange, setVolumeRange] = useState('0.64')
   const kit = useAppSelector(selectBankKit)
   const power = useAppSelector(selectPower)
   const description = useAppSelector(selectDescription)
+  const volume = useAppSelector(selectVolume)
   const dispatch = useAppDispatch()
 
   const handleVolumeRange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setVolumeRange(e.target.value)
+    dispatch(changeVolume(e.target.valueAsNumber))
     dispatch(changeDescription(`Volume: ${(e.target.valueAsNumber*100).toFixed()}`))
   }
 
@@ -23,7 +24,7 @@ export const DrumControl = () => {
     return () => {
       clearTimeout(timer)
     }
-  }, [volumeRange, dispatch, kit])
+  }, [volume, dispatch, kit])
 
   useEffect(() => {
     const displayString = kit.split('-').map( str => str.charAt(0).toUpperCase() + str.slice(1)).join(' ')
@@ -45,7 +46,7 @@ export const DrumControl = () => {
         <span className="align-middle table-cell">{description}</span>
       </div>
       <div className="mt-4">
-        <input type="range" min="0" max="1" step="0.01" defaultValue={volumeRange} onChange={(e) => handleVolumeRange(e)}
+        <input type="range" min="0" max="1" step="0.01" defaultValue={volume} onChange={(e) => handleVolumeRange(e)}
         className="appearance-none w-3/4 cursor-pointer bg-charcoal h-2 shadow-sm-lr"/>
       </div>
       <div className="mt-2 flex flex-col items-center">
